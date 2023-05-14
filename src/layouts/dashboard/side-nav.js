@@ -1,21 +1,12 @@
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
 import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  Stack,
-  SvgIcon,
-  Typography,
-  useMediaQuery
-} from '@mui/material';
+import { Box, Divider, Drawer, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
 import { items } from './config';
+import { adminItems } from './adminConfig';
 import { SideNavItem } from './side-nav-item';
 
 export const SideNav = (props) => {
@@ -52,7 +43,7 @@ export const SideNav = (props) => {
               width: 32
             }}
           >
-            <Logo />
+            <Logo/>
           </Box>
           <Box
             sx={{
@@ -84,11 +75,11 @@ export const SideNav = (props) => {
               fontSize="small"
               sx={{ color: 'neutral.500' }}
             >
-              <ChevronUpDownIcon />
+              <ChevronUpDownIcon/>
             </SvgIcon>
           </Box>
         </Box>
-        <Divider sx={{ borderColor: 'neutral.700' }} />
+        <Divider sx={{ borderColor: 'neutral.700' }}/>
         <Box
           component="nav"
           sx={{
@@ -107,6 +98,41 @@ export const SideNav = (props) => {
             }}
           >
             {items.map((item) => {
+              const active = item.path ? (pathname === item.path) : false;
+
+              return (
+                <SideNavItem
+                  active={active}
+                  disabled={item.disabled}
+                  external={item.external}
+                  icon={item.icon}
+                  key={item.title}
+                  path={item.path}
+                  title={item.title}
+                />
+              );
+            })}
+          </Stack>
+        </Box>
+        <Divider sx={{ borderColor: 'neutral.700' }}/>
+        <Box
+          component="nav"
+          sx={{
+            flexGrow: 1,
+            px: 2,
+            py: 3
+          }}
+        >
+          <Stack
+            component="ul"
+            spacing={0.5}
+            sx={{
+              listStyle: 'none',
+              p: 0,
+              m: 0
+            }}
+          >
+            {adminItems.map((item) => {
               const active = item.path ? (pathname === item.path) : false;
 
               return (

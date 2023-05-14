@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Bars3Icon from '@heroicons/react/24/solid/Bars3Icon';
-import { Avatar, Box, IconButton, Stack, SvgIcon, useMediaQuery } from '@mui/material';
+import { Box, IconButton, Stack, SvgIcon, useMediaQuery } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { usePopover } from 'src/hooks/use-popover';
 import { AccountPopover } from './account-popover';
@@ -53,22 +53,6 @@ export const TopNav = (props) => {
                 </SvgIcon>
               </IconButton>
             )}
-          </Stack>
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={2}
-          >
-            <Avatar
-              onClick={accountPopover.handleOpen}
-              ref={accountPopover.anchorRef}
-              sx={{
-                cursor: 'pointer',
-                height: 40,
-                width: 40
-              }}
-              src="/assets/avatars/avatar-anika-visser.png"
-            />
           </Stack>
         </Stack>
       </Box>

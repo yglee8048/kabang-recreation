@@ -1,53 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import { renderRank } from '../dataGrid/renderRank';
+import { renderRank } from './renderRank';
 import CustomToolbar from './CustomToolbar';
 import { styled } from '@mui/material/styles';
-
-const rows = [
-  {
-    id: 1,
-    rank: 1,
-    name: 'tigger.lee',
-    team_name: 'A',
-    team_score: 20,
-    score: 10,
-    total_score: 30,
-    probability: 10.22
-  },
-  {
-    id: 2,
-    rank: 2,
-    name: 'alexander.thunder',
-    team_name: 'B팀',
-    team_score: 30,
-    score: 10,
-    total_score: 130,
-    probability: 40.34
-  },
-  {
-    id: 3,
-    rank: 3,
-    name: 'eddie.tang',
-    team_name: 'B',
-    team_score: 30,
-    score: 10,
-    total_score: 130,
-    probability: 40.34
-  },
-  {
-    id: 4,
-    rank: 4,
-    name: 'louis.m',
-    team_name: 'B',
-    team_score: 30,
-    score: 10,
-    total_score: 130,
-    probability: 40.34
-  }
-];
 
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   border: 0,
@@ -63,38 +20,38 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     'sans-serif',
     '"Apple Color Emoji"',
     '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
+    '"Segoe UI Symbol"'
   ].join(','),
   WebkitFontSmoothing: 'auto',
   letterSpacing: 'normal',
   '& .MuiDataGrid-columnsContainer': {
-    backgroundColor: theme.palette.mode === 'light' ? '#fafafa' : '#1d1d1d',
+    backgroundColor: theme.palette.mode === 'light' ? '#fafafa' : '#1d1d1d'
   },
   '& .MuiDataGrid-iconSeparator': {
-    display: 'none',
+    display: 'none'
   },
   '& .MuiDataGrid-columnHeader': {
     borderBottom: `2px solid`,
     backgroundColor:
-      theme.palette.mode === 'light' ? '#f2f2f2' : '#303030',
+      theme.palette.mode === 'light' ? '#f2f2f2' : '#303030'
   },
   '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
     borderRight: `1px solid ${
       theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-    }`,
+    }`
   },
   '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
     borderBottom: `1px solid ${
       theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-    }`,
+    }`
   },
   '& .MuiDataGrid-cell': {
     color:
-      theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
+      theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)'
   },
   '& .MuiPaginationItem-root': {
-    borderRadius: 0,
-  },
+    borderRadius: 0
+  }
 }));
 
 const columns =
@@ -102,79 +59,75 @@ const columns =
     {
       field: 'rank',
       headerName: '순위',
-      renderCell: renderRank,
       headerAlign: 'center',
       align: 'center',
-      width: 10
+      flex: 0.1,
+      minWidth: 20,
+      renderCell: renderRank
     },
     {
       field: 'name',
       headerName: '이름',
       headerAlign: 'center',
       align: 'left',
-      width: 130
+      flex: 0.3,
+      minWidth: 60
     },
     {
-      field: 'team_name',
-      headerName: '팀',
+      field: 'leaderId',
+      headerName: '리더',
       headerAlign: 'center',
       align: 'left',
-      width: 50
-    },
-    {
-      field: 'team_score',
-      headerName: '팀점수',
-      headerAlign: 'center',
-      align: 'right',
-      width: 60
+      flex: 0.5,
+      minWidth: 130
     },
     {
       field: 'score',
-      headerName: '개인점수',
+      headerName: '점수',
       headerAlign: 'center',
       align: 'right',
-      width: 70
-    },
-    {
-      field: 'total_score',
-      headerName: '총점',
-      headerAlign: 'center',
-      align: 'right',
-      width: 60
-    },
-    {
-      field: 'probability',
-      headerName: '확률',
-      headerAlign: 'center',
-      align: 'right',
-      width: 100,
+      flex: 0.2,
+      minWidth: 60,
       valueFormatter: (params) => {
         if (params.value == null) {
           return '';
         }
-        return `${params.value.toLocaleString()} %`;
+        return `${params.value.toLocaleString()}`;
       }
     }
   ];
 
-export default function MemberTable() {
-  const { data, setData } = useState([]);
-  const { loading, setLoading } = useState(false);
+export default function TeamTable() {
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    fetch('http://localhost:8080/teams/ranking')
+      .then(res => {
+        console.log(res);
+        return res.json();
+      })
+      .then(ranking => setRows(ranking))
+      .catch(err => console.log(err));
+
+    setLoading(false);
+  }, []);
 
   return (
     <Box sx={{ height: 400, width: 1 }}>
       <StyledDataGrid
         loading={loading}
         rows={rows}
+        getRowId={(row) => row.name}
         columns={columns}
         disableColumnMenu
         density="compact"
         initialState={{
           columns: {
             columnVisibilityModel: {
-              team_name: false,
-              score: false,
-              team_score: false
+              leader: false
             }
           }
         }}

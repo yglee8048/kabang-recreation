@@ -1,0 +1,42 @@
+[
+  {
+    "id": "tigger.lee",
+    "name": "티거",
+    "team_name": "3팀"
+  },
+  {
+    "id": "mason.kim",
+    "name": "메이슨",
+    "team_name": "2팀"
+  },
+  {
+    "id": "louis.m",
+    "name": "루이스",
+    "team_name": "1팀"
+  },
+  {
+    "id": "louis.o",
+    "name": "루이",
+    "team_name": "2팀"
+  },
+  {
+    "id": "hana.zn",
+    "name": "하나",
+    "team_name": "4팀"
+  },
+  {
+    "id": "eddie.tang",
+    "name": "에디",
+    "team_name": "2팀"
+  },
+  {
+    "id": "luffy.hee",
+    "name": "루피",
+    "team_name": "1팀"
+  },
+  {
+    "id": "lea.h",
+    "name": "레아",
+    "team_name": "3팀"
+  }
+]

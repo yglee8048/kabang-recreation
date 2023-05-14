@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import MemberTable from '../dataGrid/MemberTable';
+import TeamTable from '../dataGrid/TeamTable';
 
 const Page = () => {
 
@@ -9,7 +9,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          개인 순위 | 홈캠프 워크샵
+          팀 순위 | 홈캠프 워크샵
         </title>
       </Head>
       <Box
@@ -28,12 +28,12 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  개인 순위
+                  팀 순위
                 </Typography>
               </Stack>
             </Stack>
 
-            <MemberTable/>
+            <TeamTable/>
 
           </Stack>
         </Container>

@@ -1,12 +1,10 @@
-import FlagIcon from '@heroicons/react/24/solid/FlagIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import { SvgIcon } from '@mui/material';
-import { Casino } from '@mui/icons-material';
 
-export const items = [
+export const adminItems = [
   {
-    title: '개인 순위',
-    path: '/members',
+    title: '점수 입력',
+    path: '/scoring',
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon/>
@@ -14,20 +12,20 @@ export const items = [
     )
   },
   {
-    title: '팀 순위',
-    path: '/teams',
+    title: '개인 관리',
+    path: '/customers',
     icon: (
       <SvgIcon fontSize="small">
-        <FlagIcon/>
+        <UsersIcon/>
       </SvgIcon>
     )
   },
   {
-    title: '게임 보드',
-    path: '/gameboard',
+    title: '데이터 관리',
+    path: '/settings',
     icon: (
       <SvgIcon fontSize="small">
-        <Casino/>
+        <UsersIcon/>
       </SvgIcon>
     )
   }

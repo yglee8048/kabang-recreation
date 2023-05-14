@@ -1,0 +1,26 @@
+[
+  {
+    "title": "깃발 꾸미기",
+    "type": "TEAM",
+    "description": "팀원들과 깃발을 꾸미며 친해져 봐요",
+    "image": "logo-dropbox.png",
+    "time": "5분",
+    "score": 5
+  },
+  {
+    "title": "OX 퀴즈",
+    "type": "PERSONAL",
+    "description": "당신의 지성을 뽐내봐요",
+    "image": "logo-slack.png",
+    "time": "20분",
+    "score": 50
+  },
+  {
+    "title": "판 뒤집기",
+    "type": "TEAM",
+    "description": "치열한 판 뒤집기 전쟁, 다쳐도 몰라요",
+    "image": "logo-medium.png",
+    "time": "30분",
+    "score": 15
+  }
+]
