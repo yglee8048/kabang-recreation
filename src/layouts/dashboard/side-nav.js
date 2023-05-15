@@ -1,13 +1,12 @@
-import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
 import { Box, Divider, Drawer, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
 import { items } from './config';
 import { adminItems } from './adminConfig';
 import { SideNavItem } from './side-nav-item';
+import { LocalFireDepartment } from '@mui/icons-material';
 
 export const SideNav = (props) => {
   const { open, onClose } = props;
@@ -35,8 +34,6 @@ export const SideNav = (props) => {
       >
         <Box sx={{ p: 3 }}>
           <Box
-            component={NextLink}
-            href="/"
             sx={{
               display: 'inline-flex',
               height: 32,
@@ -50,7 +47,6 @@ export const SideNav = (props) => {
               alignItems: 'center',
               backgroundColor: 'rgba(255, 255, 255, 0.04)',
               borderRadius: 1,
-              cursor: 'pointer',
               display: 'flex',
               justifyContent: 'space-between',
               mt: 2,
@@ -62,20 +58,20 @@ export const SideNav = (props) => {
                 color="inherit"
                 variant="subtitle1"
               >
-                Devias
+                HOMECAMP
               </Typography>
               <Typography
                 color="neutral.400"
                 variant="body2"
               >
-                Production
+                WORKSHOP
               </Typography>
             </div>
             <SvgIcon
-              fontSize="small"
-              sx={{ color: 'neutral.500' }}
+              fontSize="large"
+              sx={{ color: 'pink' }}
             >
-              <ChevronUpDownIcon/>
+              <LocalFireDepartment/>
             </SvgIcon>
           </Box>
         </Box>
