@@ -1,20 +1,33 @@
-name: Next.js deployment practice
+name: recreation-dashboard-deploy
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  continuous-deployment:
+  CI/CD:
     runs-on: ubuntu-latest
     steps:
       - name: Git Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js version 14.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js version 18
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 18
+
+      - name: cache
+        uses: actions/cache@v3
+        with:
+          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Build
         run: |
