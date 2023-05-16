@@ -1,11 +1,13 @@
-import { NextResponse } from 'next/server';
+import { Layout as DashboardLayout } from '../layouts/dashboard/layout';
 
-export function middleware(request) {
-  const url = request.nextUrl.clone();
-  if (url.pathname === '/') {
-    url.pathname = '/members';
-    return NextResponse.redirect(url);
-  }
+const Page = () => {
+  return (<>welcome</>);
+};
 
-  return (<></>);
-}
+Page.getLayout = (page) => (
+  <DashboardLayout>
+    {page}
+  </DashboardLayout>
+);
+
+export default Page;
