@@ -76,7 +76,7 @@ export default function MemberManageTable(props) {
   useEffect(() => {
     setLoading(true);
 
-    fetch('http://localhost:8080/members')
+    fetch('http://ec2-52-78-116-14.ap-northeast-2.compute.amazonaws.com/members')
       .then(res => {
         return res.json();
       })
