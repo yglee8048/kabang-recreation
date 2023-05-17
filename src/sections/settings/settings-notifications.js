@@ -14,6 +14,7 @@ import {
   Typography,
   Unstable_Grid2 as Grid
 } from '@mui/material';
+import { baseUrl } from 'src/api/url';
 
 export const SettingsNotifications = () => {
   const handleSubmit = useCallback(
@@ -43,7 +44,7 @@ export const SettingsNotifications = () => {
       teams: teamInit
     };
 
-    fetch('http://localhost:8080/set-up/members', {
+    fetch(`${baseUrl}/set-up/members`, {
       headers: {
         'Content-Type': 'application/json'
       },

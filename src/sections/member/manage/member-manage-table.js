@@ -5,6 +5,7 @@ import { Box, Button, Stack } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import MemberUpdateDialog from './dialog/member-update-dialog';
 import MemberRemoveDialog from './dialog/member-remove-dialog';
+import { baseUrl } from 'src/api/url';
 
 export default function MemberManageTable(props) {
   const columns =
@@ -76,7 +77,7 @@ export default function MemberManageTable(props) {
   useEffect(() => {
     setLoading(true);
 
-    fetch('http://ec2-52-78-116-14.ap-northeast-2.compute.amazonaws.com/members')
+    fetch(`${baseUrl}/members`)
       .then(res => {
         return res.json();
       })

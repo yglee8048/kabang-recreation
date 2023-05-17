@@ -3,12 +3,13 @@ import { Box, Container, Stack, Typography, Unstable_Grid2 as Grid } from '@mui/
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { GameCard } from 'src/sections/game/game-card';
 import { useEffect, useState } from 'react';
+import { baseUrl } from '../api/url';
 
 const Page = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/games')
+    fetch(`${baseUrl}/games`)
       .then(res => {
         console.log(res);
         return res.json();

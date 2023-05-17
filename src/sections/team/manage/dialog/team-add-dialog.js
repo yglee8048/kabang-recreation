@@ -10,11 +10,12 @@ import {
 import { Close, Save } from '@mui/icons-material';
 import * as React from 'react';
 import { useState } from 'react';
+import { baseUrl } from '../../../../api/url';
 
 export default function TeamAddDialog(props) {
   const { open, setOpen } = props;
   const addTeam = () => {
-    fetch('http://localhost:8080/teams', {
+    fetch(`${baseUrl}/teams`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'

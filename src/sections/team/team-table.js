@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { renderRank } from '../member/renderRank';
 import CustomToolbar from '../../components/CustomToolbar';
 import StyledTable from '../../components/StyledTable';
+import { baseUrl } from '../../api/url';
 
 const columns =
   [
@@ -54,7 +55,7 @@ export default function TeamTable() {
   useEffect(() => {
     setLoading(true);
 
-    fetch('http://localhost:8080/teams/ranking')
+    fetch(`${baseUrl}/teams/ranking`)
       .then(res => {
         console.log(res);
         return res.json();

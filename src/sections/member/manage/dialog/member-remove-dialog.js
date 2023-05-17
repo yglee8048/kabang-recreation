@@ -8,12 +8,13 @@ import {
 } from '@mui/material';
 import { Close, Delete } from '@mui/icons-material';
 import * as React from 'react';
+import { baseUrl } from 'src/api/url';
 
 export default function MemberRemoveDialog(props) {
   const { open, setOpen, member } = props;
 
   const deleteMember = () => {
-    fetch(`http://localhost:8080/members/${member.id}`, {
+    fetch(`${baseUrl}/members/${member.id}`, {
       method: 'DELETE'
     })
       .then(res => {

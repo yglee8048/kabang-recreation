@@ -5,6 +5,7 @@ import { Box, Button, Stack } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import TeamUpdateDialog from './dialog/team-update-dialog';
 import TeamRemoveDialog from './dialog/team-remove-dialog';
+import { baseUrl } from '../../../api/url';
 
 export default function TeamManageTable(props) {
   const columns =
@@ -68,7 +69,7 @@ export default function TeamManageTable(props) {
   useEffect(() => {
     setLoading(true);
 
-    fetch('http://localhost:8080/teams')
+    fetch(`${baseUrl}/teams`)
       .then(res => {
         return res.json();
       })

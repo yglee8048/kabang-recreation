@@ -22,6 +22,7 @@ import { useState } from 'react';
 import ClockIcon from '@heroicons/react/24/solid/ClockIcon';
 import { GiftIcon } from '@heroicons/react/20/solid';
 import CheckboxesTags from '../../../../components/CheckBoxesTags';
+import { baseUrl } from '../../../../api/url';
 
 export default function GameAddDialog(props) {
   const { open, setOpen, memberOptions, teamOptions } = props;
@@ -34,7 +35,7 @@ export default function GameAddDialog(props) {
   const [score, setScore] = useState(0);
   const [winners, setWinners] = useState([]);
   const addGame = () => {
-    fetch('http://localhost:8080/games', {
+    fetch(`${baseUrl}/games`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'

@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { Unstable_Grid2 as Grid } from '@mui/material';
 import { ScoreCard } from './score-card';
 import GameAddDialog from './dialog/game-add-dialog';
+import { baseUrl } from '../../../api/url';
 
 export default function ScoreBoard(props) {
   const { addOpen, setAddOpen } = props;
 
   const [memberOptions, setMemberOptions] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:8080/members/options')
+    fetch(`${baseUrl}/members/options`)
       .then(res => {
         return res.json();
       })
@@ -18,7 +19,7 @@ export default function ScoreBoard(props) {
 
   const [teamOptions, setTeamOptions] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:8080/teams/options')
+    fetch(`${baseUrl}/teams/options`)
       .then(res => {
         return res.json();
       })
@@ -29,7 +30,7 @@ export default function ScoreBoard(props) {
   const [games, setGames] = useState([]);
   const [removeOpen, setRemoveOpen] = useState(false);
   useEffect(() => {
-    fetch('http://localhost:8080/games')
+    fetch(`${baseUrl}/games`)
       .then(res => {
         return res.json();
       })

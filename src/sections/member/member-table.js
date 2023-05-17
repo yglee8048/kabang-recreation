@@ -4,6 +4,7 @@ import { renderRank } from './renderRank';
 import CustomToolbar from '../../components/CustomToolbar';
 import { renderPosibility } from './renderPosibility';
 import StyledTable from 'src/components/StyledTable';
+import { baseUrl } from '../../api/url';
 
 const columns =
   [
@@ -100,7 +101,7 @@ export default function MemberTable() {
   useEffect(() => {
     setLoading(true);
 
-    fetch('http://localhost:8080/members/ranking')
+    fetch(`${baseUrl}/members/ranking`)
       .then(res => {
         return res.json();
       })

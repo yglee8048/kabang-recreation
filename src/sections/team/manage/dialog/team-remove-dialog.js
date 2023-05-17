@@ -8,12 +8,13 @@ import {
 } from '@mui/material';
 import { Close, Delete } from '@mui/icons-material';
 import * as React from 'react';
+import { baseUrl } from '../../../../api/url';
 
 export default function TeamRemoveDialog(props) {
   const { open, setOpen, team } = props;
 
   const deleteTeam = () => {
-    fetch(`http://localhost:8080/teams/${team.name}`, {
+    fetch(`${baseUrl}/teams/${team.name}`, {
       method: 'DELETE'
     })
       .then(res => {

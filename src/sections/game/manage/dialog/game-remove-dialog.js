@@ -8,12 +8,13 @@ import {
 } from '@mui/material';
 import { Close, Delete } from '@mui/icons-material';
 import * as React from 'react';
+import { baseUrl } from '../../../../api/url';
 
 export default function GameRemoveDialog(props) {
   const { open, setOpen, id } = props;
 
   const deleteGame = () => {
-    fetch(`http://localhost:8080/games/${id}`, {
+    fetch(`${baseUrl}/games/${id}`, {
       method: 'DELETE'
     })
       .then(res => {

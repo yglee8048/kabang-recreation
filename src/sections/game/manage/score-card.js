@@ -20,6 +20,7 @@ import { GiftIcon } from '@heroicons/react/20/solid';
 import * as React from 'react';
 import { useState } from 'react';
 import GameRemoveDialog from '/src/sections/game/manage/dialog/game-remove-dialog';
+import { baseUrl } from '../../../api/url';
 
 export const ScoreCard = (props) => {
   const { game, options, removeOpen, setRemoveOpen } = props;
@@ -33,7 +34,7 @@ export const ScoreCard = (props) => {
   const [winners, setWinners] = useState(game.winners?.map(winner => ({ name: winner })) || []);
 
   const updateGame = () => {
-    fetch('http://localhost:8080/games', {
+    fetch(`${baseUrl}/games`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
@@ -114,21 +115,36 @@ export const ScoreCard = (props) => {
                 onChange={(e) => setImage(e.target.value)}
                 value={image}
               >
-                <MenuItem key="1" value="bonus.png">보너스</MenuItem>
-                <MenuItem key="2" value="brain.png">브레인</MenuItem>
-                <MenuItem key="3" value="cheer_up.png">응원</MenuItem>
-                <MenuItem key="4" value="color-board.jpeg">색 보드</MenuItem>
-                <MenuItem key="5" value="color-pen.png">색연필</MenuItem>
-                <MenuItem key="6" value="drink.png">드링크</MenuItem>
-                <MenuItem key="7" value="emotion.png">감정</MenuItem>
-                <MenuItem key="8" value="enjoy.png">엔조이</MenuItem>
-                <MenuItem key="9" value="logo-home.png">홈캠프</MenuItem>
-                <MenuItem key="10" value="math.png">수학</MenuItem>
-                <MenuItem key="11" value="quiz.png">퀴즈</MenuItem>
-                <MenuItem key="12" value="team_work.png">팀워크</MenuItem>
-                <MenuItem key="13" value="trick_face_w.png">표정연기</MenuItem>
-                <MenuItem key="14" value="whistle.png">휘슬</MenuItem>
-                <MenuItem key="15" value="xo-game.png">XO 게임</MenuItem>
+                <MenuItem key="1"
+                          value="bonus.png">보너스</MenuItem>
+                <MenuItem key="2"
+                          value="brain.png">브레인</MenuItem>
+                <MenuItem key="3"
+                          value="cheer_up.png">응원</MenuItem>
+                <MenuItem key="4"
+                          value="color-board.jpeg">색 보드</MenuItem>
+                <MenuItem key="5"
+                          value="color-pen.png">색연필</MenuItem>
+                <MenuItem key="6"
+                          value="drink.png">드링크</MenuItem>
+                <MenuItem key="7"
+                          value="emotion.png">감정</MenuItem>
+                <MenuItem key="8"
+                          value="enjoy.png">엔조이</MenuItem>
+                <MenuItem key="9"
+                          value="logo-home.png">홈캠프</MenuItem>
+                <MenuItem key="10"
+                          value="math.png">수학</MenuItem>
+                <MenuItem key="11"
+                          value="quiz.png">퀴즈</MenuItem>
+                <MenuItem key="12"
+                          value="team_work.png">팀워크</MenuItem>
+                <MenuItem key="13"
+                          value="trick_face_w.png">표정연기</MenuItem>
+                <MenuItem key="14"
+                          value="whistle.png">휘슬</MenuItem>
+                <MenuItem key="15"
+                          value="xo-game.png">XO 게임</MenuItem>
               </Select>
             </Stack>
           </Box>

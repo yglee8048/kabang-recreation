@@ -13,11 +13,12 @@ import {
 import { Close, Save } from '@mui/icons-material';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { baseUrl } from 'src/api/url';
 
 export default function MemberAddDialog(props) {
   const { open, setOpen } = props;
   const addMember = () => {
-    fetch('http://localhost:8080/members', {
+    fetch(`${baseUrl}/members`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
@@ -44,7 +45,7 @@ export default function MemberAddDialog(props) {
   const [team, setTeam] = useState('');
   const [teamOptions, setTeamOptions] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:8080/teams/options')
+    fetch(`${baseUrl}/teams/options`)
       .then(res => {
         return res.json();
       })
