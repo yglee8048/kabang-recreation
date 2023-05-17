@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import TeamTable from '../dataGrid/TeamTable';
+import TeamTable from '../sections/team/team-table';
 
 const Page = () => {
 

@@ -24,7 +24,7 @@ export const items = [
   },
   {
     title: '게임 보드',
-    path: '/gameboard',
+    path: '/games',
     icon: (
       <SvgIcon fontSize="small">
         <Casino/>

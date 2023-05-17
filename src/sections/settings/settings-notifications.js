@@ -14,9 +14,6 @@ import {
   Typography,
   Unstable_Grid2 as Grid
 } from '@mui/material';
-import memberData from './member.json';
-import teamData from './team.json';
-import gameData from './game.json';
 
 export const SettingsNotifications = () => {
   const handleSubmit = useCallback(
@@ -26,14 +23,14 @@ export const SettingsNotifications = () => {
     []
   );
 
-  const [teamInit, setTeamInit] = useState(JSON.stringify(teamData, null, 2));
+  const [teamInit, setTeamInit] = useState('');
   const handleTeamChange = useCallback(
     (event) => {
       setTeamInit(() => (event.target.value));
     },
     []
   );
-  const [memberInit, setMemberInit] = useState(JSON.stringify(memberData, null, 2));
+  const [memberInit, setMemberInit] = useState('');
   const handleMemberChange = useCallback(
     (event) => {
       setMemberInit(() => (event.target.value));
@@ -54,7 +51,7 @@ export const SettingsNotifications = () => {
       body: JSON.stringify(bodyData, null, 2)
     })
       .then(res => {
-        if (res.status === '200') {
+        if (res.status === 200) {
           alert('성공!');
         } else {
           alert('실패!');
@@ -63,7 +60,7 @@ export const SettingsNotifications = () => {
       .catch(() => alert('에러!'));
   };
 
-  const [gameInit, setGameInit] = useState(JSON.stringify(gameData, null, 2));
+  const [gameInit, setGameInit] = useState('');
   const handleGameChange = useCallback(
     (event) => {
       setGameInit(() => (event.target.value));

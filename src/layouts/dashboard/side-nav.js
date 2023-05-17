@@ -1,17 +1,17 @@
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { Box, Divider, Drawer, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
-import { Logo } from 'src/components/logo';
+import { Avatar, Box, Divider, Drawer, Stack, Typography, useMediaQuery } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
 import { items } from './config';
-import { adminItems } from './adminConfig';
+import { adminItems } from './admin-config';
 import { SideNavItem } from './side-nav-item';
-import { LocalFireDepartment } from '@mui/icons-material';
+import { useAuthContext } from '../../contexts/auth-context';
 
 export const SideNav = (props) => {
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  const { isAuthenticated } = useAuthContext();
 
   const content = (
     <Scrollbar
@@ -33,15 +33,6 @@ export const SideNav = (props) => {
         }}
       >
         <Box sx={{ p: 3 }}>
-          <Box
-            sx={{
-              display: 'inline-flex',
-              height: 32,
-              width: 32
-            }}
-          >
-            <Logo/>
-          </Box>
           <Box
             sx={{
               alignItems: 'center',
@@ -67,15 +58,12 @@ export const SideNav = (props) => {
                 WORKSHOP
               </Typography>
             </div>
-            <SvgIcon
-              fontSize="large"
-              sx={{ color: 'pink' }}
-            >
-              <LocalFireDepartment/>
-            </SvgIcon>
+            <Avatar
+              src={'/assets/logos/logo-home.png'}
+            />
           </Box>
         </Box>
-        <Divider sx={{ borderColor: 'neutral.700' }}/>
+        <Divider sx={{ borderColor: 'neutral.400' }}/>
         <Box
           component="nav"
           sx={{
@@ -110,41 +98,44 @@ export const SideNav = (props) => {
             })}
           </Stack>
         </Box>
-        <Divider sx={{ borderColor: 'neutral.700' }}/>
-        <Box
-          component="nav"
-          sx={{
-            flexGrow: 1,
-            px: 2,
-            py: 3
-          }}
-        >
-          <Stack
-            component="ul"
-            spacing={0.5}
+        {isAuthenticated && (<>
+          <Divider sx={{ borderColor: 'neutral.400' }}/>
+          <Box
+            component="nav"
             sx={{
-              listStyle: 'none',
-              p: 0,
-              m: 0
+              flexGrow: 1,
+              px: 2,
+              py: 3
             }}
           >
-            {adminItems.map((item) => {
-              const active = item.path ? (pathname === item.path) : false;
+            <Stack
+              component="ul"
+              spacing={0.5}
+              sx={{
+                listStyle: 'none',
+                p: 0,
+                m: 0
+              }}
+            >
+              {adminItems.map((item) => {
+                const active = item.path ? (pathname === item.path) : false;
 
-              return (
-                <SideNavItem
-                  active={active}
-                  disabled={item.disabled}
-                  external={item.external}
-                  icon={item.icon}
-                  key={item.title}
-                  path={item.path}
-                  title={item.title}
-                />
-              );
-            })}
-          </Stack>
-        </Box>
+                return (
+                  <SideNavItem
+                    active={active}
+                    disabled={item.disabled}
+                    external={item.external}
+                    icon={item.icon}
+                    key={item.title}
+                    path={item.path}
+                    title={item.title}
+                  />
+                );
+              })}
+
+            </Stack>
+          </Box>
+        </>)}
       </Box>
     </Scrollbar>
   );
@@ -156,7 +147,7 @@ export const SideNav = (props) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: 'neutral.800',
+            backgroundColor: '#0F3067',
             color: 'common.white',
             width: 280
           }
@@ -175,7 +166,7 @@ export const SideNav = (props) => {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: 'neutral.800',
+          backgroundColor: '#0F3067',
           color: 'common.white',
           width: 280
         }

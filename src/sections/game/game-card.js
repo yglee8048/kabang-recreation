@@ -160,7 +160,7 @@ export const GameCard = (props) => {
             display="inline"
             variant="body2"
           >
-            {game.winners}
+            {game.winners.join(", ")}
           </Typography>
         </Stack>
       </Stack>

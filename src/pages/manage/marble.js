@@ -1,12 +1,10 @@
-import { Layout as DashboardLayout } from '../layouts/dashboard/layout';
-import { Box } from '@mui/material';
+import { Layout as DashboardLayout } from '../../layouts/dashboard/layout';
 import { useEffect } from 'react';
-import Router from 'next/router';
+import { Box } from '@mui/material';
 
 const Page = () => {
   useEffect(() => {
-    Router.push('/members')
-          .catch(err => console.log(err));
+    window.open('http://localhost:8080', '_blank');
   });
 
   return (
@@ -18,7 +16,7 @@ const Page = () => {
       >
         <img
           alt="recreation-banner"
-          src="/assets/banner/recreation-banner.png"
+          src="/assets/banner/rewards-banner.png"
           width="100%"
         />
       </Box>

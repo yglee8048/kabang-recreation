@@ -7,7 +7,7 @@ const Page = () => (
   <>
     <Head>
       <title>
-        404 | Devias Kit
+        404 | 홈캠프 워크샵
       </title>
     </Head>
     <Box
@@ -63,7 +63,7 @@ const Page = () => (
             href="/"
             startIcon={(
               <SvgIcon fontSize="small">
-                <ArrowLeftIcon />
+                <ArrowLeftIcon/>
               </SvgIcon>
             )}
             sx={{ mt: 3 }}

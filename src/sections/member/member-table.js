@@ -1,59 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
 import { renderRank } from './renderRank';
-import CustomToolbar from './CustomToolbar';
-import { styled } from '@mui/material/styles';
+import CustomToolbar from '../../components/CustomToolbar';
 import { renderPosibility } from './renderPosibility';
-
-const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-  border: 0,
-  color:
-    theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.85)',
-  fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    '"Segoe UI"',
-    'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"'
-  ].join(','),
-  WebkitFontSmoothing: 'auto',
-  letterSpacing: 'normal',
-  '& .MuiDataGrid-columnsContainer': {
-    backgroundColor: theme.palette.mode === 'light' ? '#fafafa' : '#1d1d1d'
-  },
-  '& .MuiDataGrid-iconSeparator': {
-    display: 'none'
-  },
-  '& .MuiDataGrid-columnHeader': {
-    borderBottom: `2px solid`,
-    backgroundColor:
-      theme.palette.mode === 'light' ? '#f2f2f2' : '#303030'
-  },
-  '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
-    borderRight: `1px solid ${
-      theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-    }`
-  },
-  '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-    borderBottom: `1px solid ${
-      theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-    }`
-  },
-  '& .MuiDataGrid-cell': {
-    color:
-      theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)'
-  },
-  '& .MuiPaginationItem-root': {
-    borderRadius: 0
-  }
-}));
+import StyledTable from 'src/components/StyledTable';
 
 const columns =
   [
@@ -67,12 +17,20 @@ const columns =
       renderCell: renderRank
     },
     {
-      field: 'name',
-      headerName: '이름',
+      field: 'id',
+      headerName: 'id',
       headerAlign: 'center',
       align: 'left',
       flex: 0.5,
       minWidth: 130
+    },
+    {
+      field: 'name',
+      headerName: '이름',
+      headerAlign: 'center',
+      align: 'left',
+      flex: 0.2,
+      minWidth: 60
     },
     {
       field: 'teamName',
@@ -144,7 +102,6 @@ export default function MemberTable() {
 
     fetch('http://localhost:8080/members/ranking')
       .then(res => {
-        console.log(res);
         return res.json();
       })
       .then(ranking => setRows(ranking))
@@ -154,26 +111,24 @@ export default function MemberTable() {
   }, []);
 
   return (
-    <Box sx={{ height: 400, width: 1 }}>
-      <StyledDataGrid
-        loading={loading}
-        rows={rows}
-        columns={columns}
-        disableColumnMenu
-        density="compact"
-        initialState={{
-          columns: {
-            columnVisibilityModel: {
-              teamName: false,
-              score: false,
-              teamScore: false
-            }
+    <StyledTable
+      loading={loading}
+      rows={rows}
+      columns={columns}
+      getRowId={(row) => row.id}
+      initialState={{
+        columns: {
+          columnVisibilityModel: {
+            name: false,
+            teamName: false,
+            score: false,
+            teamScore: false
           }
-        }}
-        slots={{
-          toolbar: CustomToolbar
-        }}
-      />
-    </Box>
+        }
+      }}
+      slots={{
+        toolbar: CustomToolbar
+      }}
+    />
   );
 }
