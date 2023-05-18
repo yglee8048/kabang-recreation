@@ -31,7 +31,7 @@ export const AuthGuard = (props) => {
         console.log('Not authenticated, redirecting');
         router
           .replace({
-            pathname: '/secret/login',
+            pathname: '/auth/login',
             query: { continueUrl: router.asPath }
           })
           .catch(console.error);
