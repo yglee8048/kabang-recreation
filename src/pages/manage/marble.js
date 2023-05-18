@@ -17,7 +17,7 @@ import CheckboxesTags from '../../components/CheckBoxesTags';
 
 const Page = () => {
   useEffect(() => {
-    window.open('http://localhost:8080', '_blank');
+    window.open('http://localhost:1234', '_blank');
   }, []);
 
   const [excludes, setExcludes] = useState([]);
