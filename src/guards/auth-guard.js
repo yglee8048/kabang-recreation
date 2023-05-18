@@ -32,14 +32,14 @@ export const AuthGuard = (props) => {
         router
           .replace({
             pathname: '/auth/login',
-            query: router.asPath !== '/' ? { continueUrl: router.asPath } : '/members'
+            query: { continueUrl: router.asPath }
           })
           .catch(console.error);
       } else {
         setChecked(true);
       }
     },
-    [router.isReady]
+    [isAuthenticated, router]
   );
 
   if (!checked) {
