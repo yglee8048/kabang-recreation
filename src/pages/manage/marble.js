@@ -31,7 +31,7 @@ const Page = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const [scoredData, setScoredData] = useState([]);
+  const [scoredData, setScoredData] = useState(['']);
   useEffect(() => {
     fetch(`${baseUrl}/marbles?excludes=${excludes.map(e => e.name)}`)
       .then(res => {
@@ -41,7 +41,7 @@ const Page = () => {
       .catch(err => console.log(err));
   }, [excludes]);
 
-  const [nonScoredData, setNonScoredData] = useState([]);
+  const [nonScoredData, setNonScoredData] = useState(['']);
   useEffect(() => {
     fetch(`${baseUrl}/marbles/no-score`)
       .then(res => {
