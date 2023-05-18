@@ -15,7 +15,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { Add, EmojiEvents } from '@mui/icons-material';
+import { Add, EmojiEvents, Remove } from '@mui/icons-material';
 import CheckboxesTags from '../../../components/CheckBoxesTags';
 import { GiftIcon } from '@heroicons/react/20/solid';
 import * as React from 'react';
@@ -46,6 +46,13 @@ export const ScoreCard = (props) => {
       score: 0,
       names: []
     });
+
+    setWinners(newArr);
+  };
+
+  const handleRemoveWinner = () => {
+    let newArr = [...winners];
+    newArr.pop();
 
     setWinners(newArr);
   };
@@ -311,6 +318,10 @@ export const ScoreCard = (props) => {
               >
                 <Button onClick={handleAddWinner}>
                   <Add/>
+                </Button>
+                <Button onClick={handleRemoveWinner}
+                        sx={{ color: 'red' }}>
+                  <Remove/>
                 </Button>
               </Stack>
             </Grid>
