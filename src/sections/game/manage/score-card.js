@@ -174,7 +174,7 @@ export const ScoreCard = (props) => {
                 <MenuItem key="3"
                           value="cheer_up.png">응원</MenuItem>
                 <MenuItem key="4"
-                          value="color-board.jpeg">색 보드</MenuItem>
+                          value="color-board.png">색 보드</MenuItem>
                 <MenuItem key="5"
                           value="color-pen.png">색연필</MenuItem>
                 <MenuItem key="6"
@@ -197,6 +197,8 @@ export const ScoreCard = (props) => {
                           value="whistle.png">휘슬</MenuItem>
                 <MenuItem key="15"
                           value="xo-game.png">XO 게임</MenuItem>
+                <MenuItem key="16"
+                          value="fast.png">FAST</MenuItem>
               </Select>
             </Stack>
           </Box>
