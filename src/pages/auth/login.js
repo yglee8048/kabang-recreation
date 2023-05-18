@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
@@ -11,22 +11,20 @@ const Page = () => {
 
   const [id, setId] = useState('');
 
-  async function handleSignIn() {
+  const handleSignIn = () => {
     try {
-      await auth.signIn(id);
-      router.push('/manage/games');
+      auth.signIn(id)
+          .then(() => router.push('/manage/games'))
+          .catch(err => console.error(err));
     } catch (err) {
       console.error(err);
       alert('에러!');
     }
-  }
+  };
 
-  const handleSkip = useCallback(
-    () => {
-      router.push('/members');
-    },
-    [auth, router]
-  );
+  const handleSkip = () => {
+    router.push('/members');
+  };
 
   return (
     <>
