@@ -53,15 +53,19 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
 export default function StyledTable(props) {
   return (
-    <Box sx={{ height: 400, width: 1 }}>
+    <Box sx={{ minHeight: 500, width: 1 }}>
       <StyledDataGrid
+        autoHeight
         loading={props.loading}
         rows={props.rows}
         columns={props.columns}
         getRowId={props.getRowId}
         disableColumnMenu
         density="compact"
-        initialState={props.initialState}
+        initialState={{
+          ...props.initialState,
+          pagination: { paginationModel: { pageSize: 20 } }
+        }}
         slots={props.slots}
       />
     </Box>
