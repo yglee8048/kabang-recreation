@@ -6,11 +6,6 @@ import { createEmotionCache } from 'src/utils/create-emotion-cache';
 const Favicon = () => (
   <>
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/apple-touch-icon.png"
-    />
-    <link
       rel="icon"
       href="/favicon.ico"
     />
@@ -59,12 +54,12 @@ class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <Favicon />
-          <Fonts />
+          <Favicon/>
+          <Fonts/>
         </Head>
         <body>
-        <Main />
-        <NextScript />
+        <Main/>
+        <NextScript/>
         </body>
       </Html>
     );
