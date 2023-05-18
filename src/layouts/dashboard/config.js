@@ -5,6 +5,15 @@ import { Casino } from '@mui/icons-material';
 
 export const items = [
   {
+    title: '게임 보드',
+    path: '/games',
+    icon: (
+      <SvgIcon fontSize="small">
+        <Casino/>
+      </SvgIcon>
+    )
+  },
+  {
     title: '개인 순위',
     path: '/members',
     icon: (
@@ -19,15 +28,6 @@ export const items = [
     icon: (
       <SvgIcon fontSize="small">
         <FlagIcon/>
-      </SvgIcon>
-    )
-  },
-  {
-    title: '게임 보드',
-    path: '/games',
-    icon: (
-      <SvgIcon fontSize="small">
-        <Casino/>
       </SvgIcon>
     )
   }

@@ -133,47 +133,54 @@ export const GameCard = (props) => {
         </Stack>
       </Stack>
       {game?.winners?.map((winner) => (
-        <Stack
-          key={winner.score}
-          alignItems="center"
-          direction="row"
-          justifyContent="space-between"
-          spacing={2}
-          sx={{ p: 2 }}
-        >
+        <Grid container
+              key={winner.score}>
           <Stack
+            key={winner.score}
             alignItems="center"
             direction="row"
-            spacing={1}
+            justifyContent="space-between"
+            spacing={2}
+            sx={{ p: 2 }}
           >
-            <SvgIcon
-              color="action"
-              fontSize="small"
-            >
-              <GiftIcon/>
-            </SvgIcon>
-            <Typography
-              color="text.secondary"
-              display="inline"
-              variant="body2"
-            >
-              {winner.score} 점
-            </Typography>
+            <Grid xs={3}>
+              <Stack
+                alignItems="center"
+                direction="row"
+                spacing={1}
+              >
+                <SvgIcon
+                  color="action"
+                  fontSize="small"
+                >
+                  <GiftIcon/>
+                </SvgIcon>
+                <Typography
+                  color="text.secondary"
+                  display="inline"
+                  variant="body2"
+                >
+                  {winner.score} 점
+                </Typography>
+              </Stack>
+            </Grid>
+            <Grid xs={9}>
+              <Stack
+                alignItems="center"
+                direction="row"
+                spacing={1}
+              >
+                <Typography
+                  color="text.secondary"
+                  display="inline"
+                  variant="body2"
+                >
+                  {winner.names.map((o) => (`${o.name}(${o.detail})`)).join(', ')}
+                </Typography>
+              </Stack>
+            </Grid>
           </Stack>
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={1}
-          >
-            <Typography
-              color="text.secondary"
-              display="inline"
-              variant="body2"
-            >
-              {winner.names.map((o)=> (`${o.name}(${o.detail})`)).join(', ')}
-            </Typography>
-          </Stack>
-        </Stack>
+        </Grid>
       ))}
     </Card>
   );

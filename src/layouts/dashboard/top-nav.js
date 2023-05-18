@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import Bars3Icon from '@heroicons/react/24/solid/Bars3Icon';
-import { Box, IconButton, Stack, SvgIcon, useMediaQuery } from '@mui/material';
+import { Box, Button, IconButton, Stack, SvgIcon, useMediaQuery } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { VpnKey } from '@mui/icons-material';
+import NextLink from 'next/link';
 
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
@@ -50,6 +52,19 @@ export const TopNav = (props) => {
                 </SvgIcon>
               </IconButton>
             )}
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            <Button
+              color="warning"
+              component={NextLink}
+              href={`/auth/login`}
+            >
+              <VpnKey/>
+            </Button>
           </Stack>
         </Stack>
       </Box>

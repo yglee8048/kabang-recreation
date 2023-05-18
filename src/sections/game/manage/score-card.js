@@ -24,7 +24,7 @@ import GameRemoveDialog from '/src/sections/game/manage/dialog/game-remove-dialo
 import { baseUrl } from '../../../api/url';
 
 export const ScoreCard = (props) => {
-  const { game, options, removeOpen, setRemoveOpen } = props;
+  const { game, memberOptions, teamOptions, removeOpen, setRemoveOpen } = props;
 
   const [type, setType] = useState(game.type);
   const [title, setTitle] = useState(game.title);
@@ -32,6 +32,11 @@ export const ScoreCard = (props) => {
   const [description, setDescription] = useState(game.description);
   const [time, setTime] = useState(game.time);
   const [winners, setWinners] = useState(game.winners || []);
+
+  const handleTypeChange = (type) => {
+    setType(type);
+    setWinners([]);
+  };
 
   const handleWinnerChange = (id, list) => {
     let newArr = [...winners];
@@ -137,7 +142,7 @@ export const ScoreCard = (props) => {
                   select
                   label="type"
                   value={type}
-                  onChange={(e) => setType(e.target.value)}
+                  onChange={(e) => handleTypeChange(e.target.value)}
                 >
                   <MenuItem key="TEAM"
                             value="TEAM">
@@ -290,12 +295,19 @@ export const ScoreCard = (props) => {
                 direction="row"
                 spacing={1}
               >
-                <CheckboxesTags
-                  label={game.type}
-                  options={options}
-                  value={winner.names}
-                  onChange={(values) => handleWinnerChange(winner.id, values)}
-                />
+                {type === 'PERSONAL' ?
+                  (<CheckboxesTags
+                    label={type}
+                    options={memberOptions}
+                    value={winner.names}
+                    onChange={(values) => handleWinnerChange(winner.id, values)}
+                  />)
+                  : (<CheckboxesTags
+                    label={type}
+                    options={teamOptions}
+                    value={winner.names}
+                    onChange={(values) => handleWinnerChange(winner.id, values)}
+                  />)}
               </Stack>
             </Stack>
           );
@@ -359,5 +371,6 @@ export const ScoreCard = (props) => {
 
 ScoreCard.propTypes = {
   game: PropTypes.object.isRequired,
-  options: PropTypes.array.isRequired
+  memberOptions: PropTypes.array.isRequired,
+  teamOptions: PropTypes.array.isRequired
 };

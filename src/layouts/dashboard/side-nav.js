@@ -6,6 +6,7 @@ import { items } from './config';
 import { adminItems } from './admin-config';
 import { SideNavItem } from './side-nav-item';
 import { useAuthContext } from '../../contexts/auth-context';
+import NextLink from 'next/link';
 
 export const SideNav = (props) => {
   const { open, onClose } = props;
@@ -59,6 +60,8 @@ export const SideNav = (props) => {
               </Typography>
             </div>
             <Avatar
+              component={NextLink}
+              href="/"
               src={'/assets/logos/logo-home.png'}
             />
           </Box>

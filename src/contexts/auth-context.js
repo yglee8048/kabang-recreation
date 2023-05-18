@@ -82,7 +82,7 @@ export const AuthProvider = (props) => {
 
     if (isAuthenticated) {
       const user = {
-        id: 'admin1234'
+        id: 'root142536'
       };
 
       dispatch({
@@ -106,7 +106,8 @@ export const AuthProvider = (props) => {
   );
 
   const signIn = async (id) => {
-    if (id !== 'admin1234') {
+    if (id !== 'root142536') {
+      alert("Please check your ID key")
       throw new Error('Please check your email and password');
     }
 

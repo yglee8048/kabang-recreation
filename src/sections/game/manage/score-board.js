@@ -51,28 +51,19 @@ export default function ScoreBoard(props) {
             lg={12}
             key={game.id}
           >
-            {game.type === 'TEAM'
-              ? <ScoreCard
-                game={game}
-                options={teamOptions}
-                removeOpen={removeOpen}
-                setRemoveOpen={setRemoveOpen}
-              />
-              : <ScoreCard
-                game={game}
-                options={memberOptions}
-                removeOpen={removeOpen}
-                setRemoveOpen={setRemoveOpen}
-              />
-            }
+            <ScoreCard
+              game={game}
+              teamOptions={teamOptions}
+              memberOptions={memberOptions}
+              removeOpen={removeOpen}
+              setRemoveOpen={setRemoveOpen}
+            />
           </Grid>
         ))}
       </Grid>
       <GameAddDialog
         open={addOpen}
         setOpen={setAddOpen}
-        memberOptions={memberOptions}
-        teamOptions={teamOptions}
       />
     </>
   );
