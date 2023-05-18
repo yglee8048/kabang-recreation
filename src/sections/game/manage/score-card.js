@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Divider,
+  Grid,
   MenuItem,
   Select,
   Stack,
@@ -14,7 +15,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { EmojiEvents } from '@mui/icons-material';
+import { Add, EmojiEvents } from '@mui/icons-material';
 import CheckboxesTags from '../../../components/CheckBoxesTags';
 import { GiftIcon } from '@heroicons/react/20/solid';
 import * as React from 'react';
@@ -30,8 +31,31 @@ export const ScoreCard = (props) => {
   const [image, setImage] = useState(game.image);
   const [description, setDescription] = useState(game.description);
   const [time, setTime] = useState(game.time);
-  const [score, setScore] = useState(game.score);
-  const [winners, setWinners] = useState(game.winners?.map(winner => ({ name: winner })) || []);
+  const [winners, setWinners] = useState(game.winners || []);
+
+  const handleWinnerChange = (id, list) => {
+    let newArr = [...winners];
+    newArr.find(value => value.id === id).names = list;
+
+    setWinners(newArr);
+  };
+  const handleAddWinner = () => {
+    let newArr = [...winners];
+    newArr.push({
+      id: Math.random().toString(36),
+      score: 0,
+      names: []
+    });
+
+    setWinners(newArr);
+  };
+
+  const handleScoreChange = (id, score) => {
+    let newArr = [...winners];
+    newArr.find(value => value.id === id).score = score;
+
+    setWinners(newArr);
+  };
 
   const updateGame = () => {
     fetch(`${baseUrl}/games`, {
@@ -46,8 +70,7 @@ export const ScoreCard = (props) => {
         image: image,
         type: type,
         time: time,
-        score: score,
-        winners: winners.map(winner => winner.name)
+        winners: winners
       }, null, 2)
     })
       .then(res => {
@@ -70,28 +93,57 @@ export const ScoreCard = (props) => {
         }}
       >
         <CardContent>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end'
-            }}>
-            <TextField
-              id="outlined-select"
-              select
-              label="type"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
-              <MenuItem key="TEAM"
-                        value="TEAM">
-                팀
-              </MenuItem>
-              <MenuItem key="PERSONAL"
-                        value="PERSONAL">
-                개인
-              </MenuItem>
-            </TextField>
-          </Box>
+          <Grid container>
+            <Grid item
+                  xs={6}>
+              <Stack
+                alignItems="center"
+                direction="row"
+                spacing={1}
+              >
+                <SvgIcon
+                  color="action"
+                  fontSize="small"
+                >
+                  <ClockIcon/>
+                </SvgIcon>
+                <TextField
+                  id="outlined-required"
+                  label="time"
+                  type="number"
+                  required
+                  size="small"
+                  onChange={(e) => setTime(e.target.value)}
+                  value={time}
+                />
+              </Stack>
+            </Grid>
+            <Grid item
+                  xs={6}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end'
+                }}>
+                <TextField
+                  id="outlined-select"
+                  select
+                  label="type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <MenuItem key="TEAM"
+                            value="TEAM">
+                    팀
+                  </MenuItem>
+                  <MenuItem key="PERSONAL"
+                            value="PERSONAL">
+                    개인
+                  </MenuItem>
+                </TextField>
+              </Box>
+            </Grid>
+          </Grid>
           <Box
             sx={{
               display: 'flex',
@@ -182,57 +234,6 @@ export const ScoreCard = (props) => {
               color="action"
               fontSize="small"
             >
-              <ClockIcon/>
-            </SvgIcon>
-            <TextField
-              id="outlined-required"
-              label="time"
-              type="number"
-              required
-              size="small"
-              onChange={(e) => setTime(e.target.value)}
-              value={time}
-            />
-          </Stack>
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={1}
-          >
-            <SvgIcon
-              color="action"
-              fontSize="small"
-            >
-              <GiftIcon/>
-            </SvgIcon>
-            <TextField
-              id="outlined-required"
-              label="score"
-              type="number"
-              required
-              size="small"
-              onChange={(e) => setScore(e.target.value)}
-              value={score}
-            />
-          </Stack>
-        </Stack>
-        <Divider/>
-        <Stack
-          alignItems="center"
-          direction="row"
-          justifyContent="space-between"
-          spacing={2}
-          sx={{ p: 2 }}
-        >
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={1}
-          >
-            <SvgIcon
-              color="action"
-              fontSize="small"
-            >
               <EmojiEvents/>
             </SvgIcon>
             <Typography
@@ -243,36 +244,95 @@ export const ScoreCard = (props) => {
               Winners
             </Typography>
           </Stack>
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={1}
-          >
-            <CheckboxesTags
-              label={game.type}
-              options={options}
-              value={winners}
-              onChange={(values) => setWinners(values)}
-            />
-          </Stack>
         </Stack>
+        {winners?.map((winner) => {
+          return (
+            <Stack
+              key={winner.id}
+              alignItems="center"
+              direction="row"
+              justifyContent="space-between"
+              spacing={2}
+              sx={{ p: 2 }}
+            >
+              <Stack
+                alignItems="center"
+                direction="row"
+                spacing={1}
+              >
+                <SvgIcon
+                  color="action"
+                  fontSize="small"
+                >
+                  <GiftIcon/>
+                </SvgIcon>
+                <TextField
+                  id="outlined-required"
+                  label="score"
+                  type="number"
+                  required
+                  size="small"
+                  onChange={(e) => handleScoreChange(winner.id, e.target.value)}
+                  value={winner.score}
+                />
+              </Stack>
+              <Stack
+                alignItems="center"
+                direction="row"
+                spacing={1}
+              >
+                <CheckboxesTags
+                  label={game.type}
+                  options={options}
+                  value={winner.names}
+                  onChange={(values) => handleWinnerChange(winner.id, values)}
+                />
+              </Stack>
+            </Stack>
+          );
+        })}
         <Divider/>
         <Stack
           alignItems="center"
           direction="row"
-          justifyContent="flex-end"
           spacing={2}
-          sx={{ p: 2 }}
         >
-          <Button onClick={() => updateGame()}>
-            저장
-          </Button>
-          <Button
-            sx={{ color: 'red' }}
-            onClick={() => setRemoveOpen(true)}
-          >
-            삭제
-          </Button>
+          <Grid container>
+            <Grid item
+                  xs={6}>
+              <Stack
+                alignItems="center"
+                direction="row"
+                justifyContent="flex-start"
+                spacing={2}
+                sx={{ p: 1 }}
+              >
+                <Button onClick={handleAddWinner}>
+                  <Add/>
+                </Button>
+              </Stack>
+            </Grid>
+            <Grid item
+                  xs={6}>
+              <Stack
+                alignItems="center"
+                direction="row"
+                justifyContent="flex-end"
+                spacing={2}
+                sx={{ p: 1 }}
+              >
+                <Button onClick={() => updateGame()}>
+                  저장
+                </Button>
+                <Button
+                  sx={{ color: 'red' }}
+                  onClick={() => setRemoveOpen(true)}
+                >
+                  삭제
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
         </Stack>
       </Card>
       <GameRemoveDialog

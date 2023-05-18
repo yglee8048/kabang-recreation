@@ -57,7 +57,6 @@ export default function TeamTable() {
 
     fetch(`${baseUrl}/teams/ranking`)
       .then(res => {
-        console.log(res);
         return res.json();
       })
       .then(ranking => setRows(ranking))

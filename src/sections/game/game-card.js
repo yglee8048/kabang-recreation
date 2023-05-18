@@ -7,6 +7,7 @@ import {
   CardContent,
   Chip,
   Divider,
+  Grid,
   Stack,
   SvgIcon,
   Typography
@@ -42,13 +43,40 @@ export const GameCard = (props) => {
       }}
     >
       <CardContent>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'right'
-          }}>
-          {getTypeChip(game.type)}
-        </Box>
+        <Grid container>
+          <Grid item
+                xs={6}>
+            <Stack
+              alignItems="center"
+              direction="row"
+              spacing={1}
+            >
+              <SvgIcon
+                color="action"
+                fontSize="small"
+              >
+                <ClockIcon/>
+              </SvgIcon>
+              <Typography
+                color="text.secondary"
+                display="inline"
+                variant="body2"
+              >
+                약 {game.time} 분
+              </Typography>
+            </Stack>
+          </Grid>
+          <Grid item
+                xs={6}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'right'
+              }}>
+              {getTypeChip(game.type)}
+            </Box>
+          </Grid>
+        </Grid>
         <Box
           sx={{
             display: 'flex',
@@ -93,53 +121,6 @@ export const GameCard = (props) => {
             color="action"
             fontSize="small"
           >
-            <ClockIcon/>
-          </SvgIcon>
-          <Typography
-            color="text.secondary"
-            display="inline"
-            variant="body2"
-          >
-            약 {game.time} 분
-          </Typography>
-        </Stack>
-        <Stack
-          alignItems="center"
-          direction="row"
-          spacing={1}
-        >
-          <SvgIcon
-            color="action"
-            fontSize="small"
-          >
-            <GiftIcon/>
-          </SvgIcon>
-          <Typography
-            color="text.secondary"
-            display="inline"
-            variant="body2"
-          >
-            {game.score} 점
-          </Typography>
-        </Stack>
-      </Stack>
-      <Divider/>
-      <Stack
-        alignItems="center"
-        direction="row"
-        justifyContent="space-between"
-        spacing={2}
-        sx={{ p: 2 }}
-      >
-        <Stack
-          alignItems="center"
-          direction="row"
-          spacing={1}
-        >
-          <SvgIcon
-            color="action"
-            fontSize="small"
-          >
             <EmojiEvents/>
           </SvgIcon>
           <Typography
@@ -150,20 +131,50 @@ export const GameCard = (props) => {
             Winners
           </Typography>
         </Stack>
+      </Stack>
+      {game?.winners?.map((winner) => (
         <Stack
+          key={winner.score}
           alignItems="center"
           direction="row"
-          spacing={1}
+          justifyContent="space-between"
+          spacing={2}
+          sx={{ p: 2 }}
         >
-          <Typography
-            color="text.secondary"
-            display="inline"
-            variant="body2"
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={1}
           >
-            {game.winners.join(", ")}
-          </Typography>
+            <SvgIcon
+              color="action"
+              fontSize="small"
+            >
+              <GiftIcon/>
+            </SvgIcon>
+            <Typography
+              color="text.secondary"
+              display="inline"
+              variant="body2"
+            >
+              {winner.score} 점
+            </Typography>
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={1}
+          >
+            <Typography
+              color="text.secondary"
+              display="inline"
+              variant="body2"
+            >
+              {winner.names.map((o)=> (`${o.name}(${o.detail})`)).join(', ')}
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
+      ))}
     </Card>
   );
 };
