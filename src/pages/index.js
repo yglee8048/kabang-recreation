@@ -112,13 +112,13 @@ const Page = () => {
                     id: '1',
                     image: '/assets/products/thumblr.jpg',
                     name: '카카오 프렌즈 텀블러',
-                    description: '인싸'
+                    description: '귀여운 텀블러'
                   },
                   {
                     id: '2',
                     image: '/assets/products/umb.jpg',
                     name: '카카오 프렌즈 우산',
-                    description: '카카오 프렌즈'
+                    description: '우산 챙겨가세요'
                   }
                 ]}
                 sx={{ height: '100%' }}
