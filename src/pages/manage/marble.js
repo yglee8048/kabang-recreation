@@ -31,6 +31,8 @@ const Page = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const [nonExcludes, setNonExcludes] = useState([]);
+
   const [scoredData, setScoredData] = useState(['']);
   useEffect(() => {
     fetch(`${baseUrl}/marbles?excludes=${excludes.map(e => e.name)}`)
@@ -43,13 +45,13 @@ const Page = () => {
 
   const [nonScoredData, setNonScoredData] = useState(['']);
   useEffect(() => {
-    fetch(`${baseUrl}/marbles/no-score`)
+    fetch(`${baseUrl}/marbles/no-score?excludes=${nonExcludes.map(e => e.name)}`)
       .then(res => {
         return res.json();
       })
       .then(ranking => setNonScoredData(ranking))
       .catch(err => console.log(err));
-  }, []);
+  }, [nonExcludes]);
 
   return (
     <>
@@ -124,6 +126,24 @@ const Page = () => {
               </Stack>
             </Stack>
           </CardContent>
+          <Divider/>
+          <CardActions sx={{ justifyContent: 'flex-end' }}>
+            <Stack
+              sx={{ paddingTop: 2 }}
+              direction="row"
+              spacing={2}
+            >
+              <Typography>
+                제외
+              </Typography>
+              <CheckboxesTags
+                label="MEMBER"
+                options={memberOptions}
+                value={nonExcludes}
+                onChange={(values) => setNonExcludes(values)}
+              />
+            </Stack>
+          </CardActions>
         </Card>
       </Stack>
     </>
