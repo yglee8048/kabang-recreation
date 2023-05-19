@@ -143,42 +143,38 @@ export const GameCard = (props) => {
             spacing={2}
             sx={{ p: 2 }}
           >
-            <Grid xs={3}>
-              <Stack
-                alignItems="center"
-                direction="row"
-                spacing={1}
+            <Stack
+              alignItems="center"
+              direction="row"
+              spacing={1}
+            >
+              <SvgIcon
+                color="action"
+                fontSize="small"
               >
-                <SvgIcon
-                  color="action"
-                  fontSize="small"
-                >
-                  <GiftIcon/>
-                </SvgIcon>
-                <Typography
-                  color="text.secondary"
-                  display="inline"
-                  variant="body2"
-                >
-                  {winner.score} 점
-                </Typography>
-              </Stack>
-            </Grid>
-            <Grid xs={9}>
-              <Stack
-                alignItems="center"
-                direction="row"
-                spacing={1}
+                <GiftIcon/>
+              </SvgIcon>
+              <Typography
+                color="text.secondary"
+                display="inline"
+                variant="body2"
               >
-                <Typography
-                  color="text.secondary"
-                  display="inline"
-                  variant="body2"
-                >
-                  {winner.names.map((o) => (`${o.name}(${o.detail})`)).join(', ')}
-                </Typography>
-              </Stack>
-            </Grid>
+                {winner.score} 점
+              </Typography>
+            </Stack>
+            <Stack
+              alignItems="center"
+              direction="row"
+              spacing={1}
+            >
+              <Typography
+                color="text.secondary"
+                display="inline"
+                variant="body2"
+              >
+                {winner.names.map((o) => (`${o.name}(${o.detail})`)).join(', ')}
+              </Typography>
+            </Stack>
           </Stack>
         </Grid>
       ))}
