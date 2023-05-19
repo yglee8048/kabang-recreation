@@ -34,7 +34,7 @@ const Page = () => {
                     id: '1',
                     image: '/assets/products/airpod.png',
                     name: '1등) 에어팟 프로 2세대',
-                    description: '약 30만원 상당'
+                    description: 'A.P.P.L.E'
                   },
                   {
                     id: '2',
@@ -45,8 +45,8 @@ const Page = () => {
                   {
                     id: '2',
                     image: '/assets/products/hwajang.png',
-                    name: '3등) 장인이 만든 화장품',
-                    description: '약 10만원 상당'
+                    name: '3등) 화장품 세트',
+                    description: '장인이 한땀한땀 만든'
                   }
                 ]}
                 sx={{ height: '100%' }}
@@ -82,19 +82,19 @@ const Page = () => {
                     id: '4',
                     image: '/assets/products/tshirts.jpeg',
                     name: 'NETHERWORLD 티셔츠',
-                    description: '약 10만원 상당'
+                    description: '인플루언서 브랜드'
                   },
                   {
                     id: '5',
                     image: '/assets/products/baji.jpg',
                     name: 'NETHERWORLD 바지',
-                    description: '약 10만원 상당'
+                    description: '인플루언서 브랜드'
                   },
                   {
                     id: '6',
                     image: '/assets/products/pack.png',
                     name: '시투안 리플랙터 파우더팩 세트',
-                    description: '약 13만원 상당'
+                    description: '품절 대란'
                   }
                 ]}
                 sx={{ height: '100%' }}
@@ -112,7 +112,7 @@ const Page = () => {
                     id: '1',
                     image: '/assets/products/thumblr.jpg',
                     name: '카카오 프렌즈 텀블러',
-                    description: '카카오 프렌즈'
+                    description: '인싸'
                   },
                   {
                     id: '2',
